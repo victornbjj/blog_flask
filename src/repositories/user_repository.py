@@ -9,6 +9,17 @@ def list_all():
     return db.session.scalars(query).all()
 
 
+def get_by_email(email: str) -> User | None:
+    query = db.select(User).where(User.email == email)
+    return db.session.scalar(query)
+
+
+def get_by_username(username: str) -> User | None:
+    query = db.select(User).where(User.username == username)
+    return db.session.scalar(query)
+    
+    
+    
 def get_by_id_or_404(user_id: int) -> User:
     return db.get_or_404(User, user_id)
 
